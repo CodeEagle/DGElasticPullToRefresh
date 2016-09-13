@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import DGElasticPullToRefresh
 class ViewController: UIViewController {
 
     // MARK: -
