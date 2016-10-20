@@ -2,7 +2,7 @@
 //  DGElasticPullToRefresh.h
 //  DGElasticPullToRefresh
 //
-//  Created by LawLincoln on 16/9/13.
+//  Created by LawLincoln on 2016/10/20.
 //  Copyright © 2016年 Danil Gontovnik. All rights reserved.
 //
 

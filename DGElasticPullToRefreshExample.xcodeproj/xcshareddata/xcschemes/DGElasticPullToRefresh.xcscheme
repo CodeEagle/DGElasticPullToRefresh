@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "16AAEDC91D87F49C0024B5A7"
+               BlueprintIdentifier = "1630E17F1DB89D7300B251C5"
                BuildableName = "DGElasticPullToRefresh.framework"
                BlueprintName = "DGElasticPullToRefresh"
                ReferencedContainer = "container:DGElasticPullToRefreshExample.xcodeproj">
@@ -45,7 +45,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "16AAEDC91D87F49C0024B5A7"
+            BlueprintIdentifier = "1630E17F1DB89D7300B251C5"
             BuildableName = "DGElasticPullToRefresh.framework"
             BlueprintName = "DGElasticPullToRefresh"
             ReferencedContainer = "container:DGElasticPullToRefreshExample.xcodeproj">
@@ -63,7 +63,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "16AAEDC91D87F49C0024B5A7"
+            BlueprintIdentifier = "1630E17F1DB89D7300B251C5"
             BuildableName = "DGElasticPullToRefresh.framework"
             BlueprintName = "DGElasticPullToRefresh"
             ReferencedContainer = "container:DGElasticPullToRefreshExample.xcodeproj">

@@ -23,7 +23,7 @@ Open and run the DGElasticPullToRefreshExample project in Xcode to see DGElastic
 ### CocoaPods
 
 ``` ruby
-pod 'DGElasticPullToRefresh'
+pod "DGElasticPullToRefresh"
 ```
 
 ### Manual
@@ -48,7 +48,7 @@ tableView.dg_setPullToRefreshBackgroundColor(tableView.backgroundColor!)
 Do not forget to remove pull to refresh on view controller deinit. It is a temporary solution. 
 
 ``` swift
-deinit {
+deinit() {
     tableView.dg_removePullToRefresh()
 }
 ```
