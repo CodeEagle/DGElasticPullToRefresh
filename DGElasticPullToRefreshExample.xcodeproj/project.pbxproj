@@ -198,7 +198,7 @@
 				TargetAttributes = {
 					05CD14641BBE8FEA00AF4030 = {
 						CreatedOnToolsVersion = 7.0;
-						DevelopmentTeam = L5W9FHSX92;
+						DevelopmentTeam = NR6298RRHY;
 						LastSwiftMigration = 0800;
 					};
 					1630E17F1DB89D7300B251C5 = {
@@ -379,7 +379,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = L5W9FHSX92;
+				DEVELOPMENT_TEAM = NR6298RRHY;
 				INFOPLIST_FILE = DGElasticPullToRefreshExample/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -394,7 +394,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = L5W9FHSX92;
+				DEVELOPMENT_TEAM = NR6298RRHY;
 				INFOPLIST_FILE = DGElasticPullToRefreshExample/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -488,6 +488,7 @@
 				1630E18A1DB89D7300B251C5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
