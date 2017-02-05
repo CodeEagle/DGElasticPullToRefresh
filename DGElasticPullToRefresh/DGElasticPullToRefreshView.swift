@@ -49,7 +49,7 @@ private struct __Key_ { static var impactGenerator = "impactGenerator" }
 @available(iOS 10.0, *)
 extension DGElasticPullToRefreshView {
     
-    private var impactGenerator: UIImpactFeedbackGenerator {
+    private var impactGenerator: UIImpactFeedbackGenerator? {
         var impact: UIImpactFeedbackGenerator! = objc_getAssociatedObject(self, &__Key_.impactGenerator) as? UIImpactFeedbackGenerator
         if impact == nil {
             impact = UIImpactFeedbackGenerator(style: UIImpactFeedbackStyle.light)
@@ -61,8 +61,8 @@ extension DGElasticPullToRefreshView {
     @available(iOS 10.0, *)
     func handleStateChange() {
         switch _state {
-        case .dragging: impactGenerator.prepare()
-        case .animatingBounce: impactGenerator.impactOccurred()
+        case .dragging: impactGenerator?.prepare()
+        case .animatingBounce: impactGenerator?.impactOccurred()
         default: break
         }
     }
