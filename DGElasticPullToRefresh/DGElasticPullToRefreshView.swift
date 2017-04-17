@@ -114,6 +114,8 @@ open class DGElasticPullToRefreshView: UIView {
         }
     }
     
+    var enable = true
+    
     var observing: Bool = false {
         didSet {
             guard let scrollView = scrollView() else { return }
@@ -194,6 +196,7 @@ open class DGElasticPullToRefreshView: UIView {
     // MARK: Observer
     
     override open func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+        guard enable else { return }
         let newValue = change?[NSKeyValueChangeKey.newKey] as AnyObject?
         if keyPath == DGElasticPullToRefreshConstants.KeyPaths.ContentOffset {
             if let newContentOffsetY = newValue?.cgPointValue.y, let scrollView = scrollView() {

@@ -79,7 +79,6 @@ extension ViewController: UITableViewDataSource {
         
         return UITableViewCell()
     }
-    
 }
 
 // MARK: -
@@ -88,8 +87,9 @@ extension ViewController: UITableViewDataSource {
 extension ViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.dg_startLoading()
+//        tableView.dg_startLoading()
         tableView.deselectRow(at: indexPath, animated: true)
+        tableView.dg_toggle(enable: indexPath.row % 2 == 0)
     }
     
 }

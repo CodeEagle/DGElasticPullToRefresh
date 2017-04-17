@@ -146,6 +146,10 @@ public extension UIScrollView {
     public func dg_stopLoading() {
         pullToRefreshView?.stopLoading()
     }
+    
+    public func dg_toggle(enable: Bool) {
+        pullToRefreshView?.enable = enable
+    }
 }
 
 // MARK: -
