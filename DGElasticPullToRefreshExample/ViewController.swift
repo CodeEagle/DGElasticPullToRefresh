@@ -35,17 +35,22 @@ class ViewController: UIViewController {
         
         let loadingView = DGElasticPullToRefreshLoadingViewCircle()
 //        loadingView.tintColor = UIColor(red: 78/255.0, green: 221/255.0, blue: 200/255.0, alpha: 1.0)
-        tableView.dg_addPullToRefreshWithActionHandler({ [weak self] () -> Void in
+        tableView.dgelastic.configActionHandler({ [weak self] () -> Void in
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64(1.5 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC), execute: {
-                self?.tableView.dg_stopLoading()
+                self?.tableView.dgelastic.stopLoading()
             })
         }, loadingView: loadingView)
+//        tableView.dg_addPullToRefreshWithActionHandler({ [weak self] () -> Void in
+//            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64(1.5 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC), execute: {
+//                self?.tableView.dg_stopLoading()
+//            })
+//        }, loadingView: loadingView)
 //        tableView.dg_setPullToRefreshFillColor(UIColor(red: 57/255.0, green: 67/255.0, blue: 89/255.0, alpha: 1.0))
 //        tableView.dg_setPullToRefreshBackgroundColor(tableView.backgroundColor!)
     }
     
     deinit {
-        tableView.dg_removePullToRefresh()
+        tableView.dgelastic.remove()
     }
     
 }
@@ -89,7 +94,7 @@ extension ViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 //        tableView.dg_startLoading()
         tableView.deselectRow(at: indexPath, animated: true)
-        tableView.dg_toggle(enable: indexPath.row % 2 == 0)
+        tableView.dgelastic.isEnabled = indexPath.row % 2 == 0
     }
     
 }
