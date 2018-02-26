@@ -223,7 +223,7 @@ open class DGElasticPullToRefreshView: UIView {
     // MARK: -
     // MARK: Notifications
     
-    func applicationWillEnterForeground() {
+    @objc func applicationWillEnterForeground() {
         if state == .loading {
             layoutSubviews()
         }
@@ -390,7 +390,7 @@ open class DGElasticPullToRefreshView: UIView {
         displayLink.isPaused = true
     }
     
-    func displayLinkTick() {
+    @objc func displayLinkTick() {
         let width = bounds.width
         var height: CGFloat = 0.0
         
