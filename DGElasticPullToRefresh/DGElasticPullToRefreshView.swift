@@ -279,7 +279,7 @@ public final class DGElasticPullToRefreshView: UIView {
         } else if state.isAnyOf([.dragging, .stopped]) {
             let pullProgress: CGFloat = offsetY / DGElasticPullToRefreshConstants.MinOffsetToPull
             loadingView?.setPullProgress(pullProgress)
-            if pullProgress - lastProgress >= 0.1, lastProgress <= 1, pullProgress <= 1 {
+            if pullProgress - lastProgress >= 0.2, lastProgress <= 1, pullProgress <= 1 {
                 lastProgress = pullProgress
                 if #available(iOS 10.0, *) {
                     handleProgressChange()
