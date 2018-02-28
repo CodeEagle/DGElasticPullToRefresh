@@ -53,45 +53,6 @@ public extension UIScrollView {
             objc_setAssociatedObject(self, &dg_associatedKeys.pullToRefreshView, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         }
     }
-    
-    // MARK: - Methods (Public)
-    
-//    public func dg_addPullToRefreshWithActionHandler(_ actionHandler: @escaping () -> Void, loadingView: DGElasticPullToRefreshLoadingView?) {
-//        isMultipleTouchEnabled = false
-//        panGestureRecognizer.maximumNumberOfTouches = 1
-//        
-//        pullToRefresh.actionHandler = actionHandler
-//        pullToRefresh.loadingView = loadingView
-//        addSubview(pullToRefresh)
-//        
-//        pullToRefresh.observing = true
-//    }
-    
-//    public func dg_removePullToRefresh() {
-//        pullToRefresh.disassociateDisplayLink()
-//        pullToRefresh.observing = false
-//        pullToRefresh.removeFromSuperview()
-//    }
-    
-//    public func dg_setPullToRefreshBackgroundColor(_ color: UIColor) {
-//        pullToRefresh.backgroundColor = color
-//    }
-//    
-//    public func dg_setPullToRefreshFillColor(_ color: UIColor) {
-//        pullToRefresh.fillColor = color
-//    }
-//    
-//    public func dg_startLoading() {
-//        pullToRefresh.startLoading()
-//    }
-//    
-//    public func dg_stopLoading() {
-//        pullToRefresh.stopLoading()
-//    }
-//    
-//    public func dg_toggle(enable: Bool) {
-//        pullToRefresh.enable = enable
-//    }
 }
 
 // MARK: -

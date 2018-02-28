@@ -44,16 +44,31 @@ public enum DGElasticPullToRefreshState: Int {
 // MARK: -
 // MARK: DGElasticPullToRefreshView
 
-private struct __Key_ { static var impactGenerator = "impactGenerator" }
 
+private var progressImpactGeneratorKey: Void
+private var releaseImpactGeneratorKey: Void
 @available(iOS 10.0, *)
 extension DGElasticPullToRefreshView {
     
-    private var impactGenerator: UIImpactFeedbackGenerator? {
-        var impact: UIImpactFeedbackGenerator! = objc_getAssociatedObject(self, &__Key_.impactGenerator) as? UIImpactFeedbackGenerator
-        if impact == nil {
+    private var progressImpactGenerator: UIImpactFeedbackGenerator? {
+        var impact: UIImpactFeedbackGenerator
+        if let value = objc_getAssociatedObject(self, &progressImpactGeneratorKey) as? UIImpactFeedbackGenerator {
+            impact = value
+        } else {
             impact = UIImpactFeedbackGenerator(style: UIImpactFeedbackStyle.light)
-            objc_setAssociatedObject(self, &__Key_.impactGenerator, impact, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+            objc_setAssociatedObject(self, &progressImpactGeneratorKey, impact, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+        }
+        impact.prepare()
+        return impact
+    }
+    
+    private var releaseImpactGenerator: UIImpactFeedbackGenerator? {
+        var impact: UIImpactFeedbackGenerator
+        if let value = objc_getAssociatedObject(self, &releaseImpactGeneratorKey) as? UIImpactFeedbackGenerator {
+            impact = value
+        } else {
+            impact = UIImpactFeedbackGenerator(style: UIImpactFeedbackStyle.heavy)
+            objc_setAssociatedObject(self, &releaseImpactGeneratorKey, impact, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         }
         return impact
     }
@@ -61,10 +76,15 @@ extension DGElasticPullToRefreshView {
     @available(iOS 10.0, *)
     func handleStateChange() {
         switch _state {
-        case .dragging: impactGenerator?.prepare()
-        case .animatingBounce: impactGenerator?.impactOccurred()
+        case .dragging: releaseImpactGenerator?.prepare()
+        case .animatingBounce: releaseImpactGenerator?.impactOccurred()
         default: break
         }
+    }
+    
+    @available(iOS 10.0, *)
+    func handleProgressChange() {
+        progressImpactGenerator?.impactOccurred()
     }
 }
 
@@ -98,6 +118,7 @@ public final class DGElasticPullToRefreshView: UIView {
     
     private var originalContentInsetTop: CGFloat = 0.0 { didSet { layoutSubviews() } }
     private let shapeLayer = CAShapeLayer()
+    private var lastProgress: CGFloat = 0
     
     private lazy var displayLink: CADisplayLink = {
         let displayLink = CADisplayLink(target: self, selector: #selector(self.displayLinkTick))
@@ -258,6 +279,14 @@ public final class DGElasticPullToRefreshView: UIView {
         } else if state.isAnyOf([.dragging, .stopped]) {
             let pullProgress: CGFloat = offsetY / DGElasticPullToRefreshConstants.MinOffsetToPull
             loadingView?.setPullProgress(pullProgress)
+            if pullProgress - lastProgress >= 0.1, lastProgress <= 1, pullProgress <= 1 {
+                lastProgress = pullProgress
+                if #available(iOS 10.0, *) {
+                    handleProgressChange()
+                }
+            } else if lastProgress - pullProgress >= 0 {
+                lastProgress = pullProgress
+            }
         }
     }
     
