@@ -55,7 +55,7 @@ extension DGElasticPullToRefreshView {
         if let value = objc_getAssociatedObject(self, &progressImpactGeneratorKey) as? UIImpactFeedbackGenerator {
             impact = value
         } else {
-            impact = UIImpactFeedbackGenerator(style: UIImpactFeedbackStyle.light)
+            impact = UIImpactFeedbackGenerator(style: UIImpactFeedbackGenerator.FeedbackStyle.light)
             objc_setAssociatedObject(self, &progressImpactGeneratorKey, impact, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         }
         impact.prepare()
@@ -67,7 +67,7 @@ extension DGElasticPullToRefreshView {
         if let value = objc_getAssociatedObject(self, &releaseImpactGeneratorKey) as? UIImpactFeedbackGenerator {
             impact = value
         } else {
-            impact = UIImpactFeedbackGenerator(style: UIImpactFeedbackStyle.heavy)
+            impact = UIImpactFeedbackGenerator(style: UIImpactFeedbackGenerator.FeedbackStyle.heavy)
             objc_setAssociatedObject(self, &releaseImpactGeneratorKey, impact, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         }
         return impact
@@ -122,7 +122,7 @@ public final class DGElasticPullToRefreshView: UIView {
     
     private lazy var displayLink: CADisplayLink = {
         let displayLink = CADisplayLink(target: self, selector: #selector(self.displayLinkTick))
-        displayLink.add(to: RunLoop.main, forMode: RunLoopMode.commonModes)
+        displayLink.add(to: RunLoop.main, forMode: RunLoop.Mode.common)
         displayLink.isPaused = true
         return displayLink
     }()
@@ -198,7 +198,7 @@ public final class DGElasticPullToRefreshView: UIView {
         addSubview(r2ControlPointView)
         addSubview(r3ControlPointView)
         
-        NotificationCenter.default.addObserver(self, selector: #selector(self.applicationWillEnterForeground), name: NSNotification.Name.UIApplicationWillEnterForeground, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.applicationWillEnterForeground), name: UIApplication.willEnterForegroundNotification, object: nil)
     }
 
     required public init?(coder aDecoder: NSCoder) {
@@ -416,7 +416,7 @@ public final class DGElasticPullToRefreshView: UIView {
         loadingView?.maskLayer.path = shapeLayer.path
     }
     
-    override open func layoutSubviews() {
+    override public func layoutSubviews() {
         super.layoutSubviews()
         
         if let scrollView = targetScrollView , state != .animatingBounce {
