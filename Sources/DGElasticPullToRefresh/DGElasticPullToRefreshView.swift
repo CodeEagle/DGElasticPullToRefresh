@@ -495,7 +495,6 @@ extension DGElasticPullToRefreshView {
     }
     
     private func addContentInsetObserver(for scrollView: UIScrollView) {
-        originalContentInsetTop = scrollView.contentInset.top
         let ob = scrollView.observe(\UIScrollView.contentInset, options: .new, changeHandler: {[unowned self] (scrollView, result) in
             guard self.isEnabled else { return }
             guard self.ignoreConentInset == false else { return }
