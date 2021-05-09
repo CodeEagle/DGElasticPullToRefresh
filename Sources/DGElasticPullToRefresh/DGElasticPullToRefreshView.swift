@@ -45,10 +45,22 @@ public enum DGElasticPullToRefreshState: Int {
 // MARK: DGElasticPullToRefreshView
 
 
-private var progressImpactGeneratorKey: Void
-private var releaseImpactGeneratorKey: Void
-@available(iOS 10.0, *)
+private var progressImpactGeneratorKey: Void?
+private var releaseImpactGeneratorKey: Void?
+
 extension DGElasticPullToRefreshView {
+    public struct FeedbackPolicy: RawRepresentable, OptionSet {
+        public let rawValue: Int
+        public init(rawValue: Int) { self.rawValue = rawValue }
+        
+        public static let nope = FeedbackPolicy([])
+        public static let pull = FeedbackPolicy(rawValue: 1)
+        public static let release = FeedbackPolicy(rawValue: 1 << 1)
+        public static let all = FeedbackPolicy(rawValue: 1 << 2)
+        
+        public var isPullEnabled: Bool { rawValue & FeedbackPolicy.pull.rawValue != 0 }
+        public var isReleaseEnabled: Bool { rawValue & FeedbackPolicy.release.rawValue != 0 }
+    }
     
     private var progressImpactGenerator: UIImpactFeedbackGenerator? {
         var impact: UIImpactFeedbackGenerator
@@ -73,17 +85,17 @@ extension DGElasticPullToRefreshView {
         return impact
     }
     
-    @available(iOS 10.0, *)
     func handleStateChange() {
+        guard feedbackPolicy.isReleaseEnabled else { return }
         switch _state {
         case .dragging: releaseImpactGenerator?.prepare()
         case .animatingBounce: releaseImpactGenerator?.impactOccurred()
         default: break
         }
     }
-    
-    @available(iOS 10.0, *)
+
     func handleProgressChange() {
+        guard feedbackPolicy.isPullEnabled else { return }
         progressImpactGenerator?.impactOccurred()
     }
 }
@@ -93,7 +105,7 @@ public final class DGElasticPullToRefreshView: UIView {
     // MARK: -
     // MARK: Vars
     private var _state: DGElasticPullToRefreshState = .stopped
-    private var state: DGElasticPullToRefreshState {
+    public private(set) var state: DGElasticPullToRefreshState {
         get { return _state }
         set {
             let previousValue = state
@@ -138,9 +150,13 @@ public final class DGElasticPullToRefreshView: UIView {
         }
     }
     
-    private weak var targetScrollView: UIScrollView?
+    private weak var targetScrollView: UIScrollView? 
     
+    /// Enabled pull to refresh
     public var isEnabled = true
+    
+    /// Generate Impact Feedback when pull
+    public var feedbackPolicy: FeedbackPolicy = .release
     private var ignoreConentInset = false
     
     private lazy var observers: [String : NSKeyValueObservation] = [:]
@@ -479,6 +495,7 @@ extension DGElasticPullToRefreshView {
     }
     
     private func addContentInsetObserver(for scrollView: UIScrollView) {
+        originalContentInsetTop = scrollView.contentInset.top
         let ob = scrollView.observe(\UIScrollView.contentInset, options: .new, changeHandler: {[unowned self] (scrollView, result) in
             guard self.isEnabled else { return }
             guard self.ignoreConentInset == false else { return }
@@ -530,7 +547,7 @@ extension DGElasticPullToRefreshView {
     }
     
     public func stopLoading() {
-        guard state != .animatingToStopped else { return }
+        guard state != .animatingToStopped, state != .stopped else { return }
         state = .animatingToStopped
     }
 }

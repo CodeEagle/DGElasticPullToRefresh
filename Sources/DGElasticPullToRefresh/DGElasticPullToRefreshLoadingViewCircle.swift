@@ -29,7 +29,7 @@ import UIKit
 // MARK: -
 // MARK: (CGFloat) Extension
 
-public extension CGFloat {
+extension CGFloat {
     
     public func toRadians() -> CGFloat {
         return (self * CGFloat(Double.pi)) / 180.0

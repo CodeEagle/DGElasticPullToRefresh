@@ -73,3 +73,4 @@ fastlane/test_output
 *.p12
 upload_app_to_bugly_result.json
 update_app_to_bugly_result.json
+.swiftpm

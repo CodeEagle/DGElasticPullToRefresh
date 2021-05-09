@@ -29,7 +29,7 @@ import UIKit
 // MARK: -
 // MARK: (UIScrollView) Extension
 
-public extension UIScrollView {
+ extension UIScrollView {
 
     // MARK: -
     // MARK: Vars

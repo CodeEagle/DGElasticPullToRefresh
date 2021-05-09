@@ -35,6 +35,7 @@ class ViewController: UIViewController {
         
         let loadingView = DGElasticPullToRefreshLoadingViewCircle()
 //        loadingView.tintColor = UIColor(red: 78/255.0, green: 221/255.0, blue: 200/255.0, alpha: 1.0)
+        tableView.contentInset.top = 100
         tableView.dgelastic.configActionHandler({ [weak self] () -> Void in
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64(1.5 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC), execute: {
                 self?.tableView.dgelastic.stopLoading()
